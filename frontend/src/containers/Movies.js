@@ -4,6 +4,9 @@ import { gql } from '@apollo/client';
 //import { graphql } from 'react-apollo';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 //import { ApolloProvider } from '@apollo/client';
+//import * as ApolloReactHooks from '@apollo/client';
+
+
 //make a frond-end Queries which will react use
 const allMovies = gql`
 {
@@ -17,22 +20,16 @@ const allMovies = gql`
 class Movies extends Component {
     state = {
         movies: [
-            { id:1, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:2, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:3, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:4, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:5, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:6, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:7, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'},
-            { id:8, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'}
+            { id:1, name: 'John Wick Parabellum', genre: 'Action', year: 2019, image: 'https://rb.gy/mmwyus'}
+            
         ]
     }
 
     componentDidMount() {
-        this.getData();
+        this.startSetData();
     }
 
-    getData = async () => {
+    startSetData = async () => {
         const client = new ApolloClient({
             uri: 'http://localhost:4000/graphql',
             cache: new InMemoryCache()
@@ -49,12 +46,12 @@ class Movies extends Component {
             }
             `
           })
-          .then(result => console.log('Not in Render', result));
+          .then( (result) => console.log('Not in Render', result));
     }
 
     render() {
         
-        console.log('Movies Component', this.props);
+        console.log('Movies Component', this.state.movies);
         return (
             <div className="movies">
                 { this.state.movies.map( (movie) => {
@@ -71,4 +68,5 @@ class Movies extends Component {
 }
 
 export default Movies;
+//export default graphql(allMovies)(Movies)
 //bind query(allMovies) from backend  with frontend Component(Movies)
