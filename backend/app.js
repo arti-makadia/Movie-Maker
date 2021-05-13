@@ -13,7 +13,7 @@ mongoose.connect(
           useCreateIndex: true,
           useNewUrlParser: true
       })
-      .then(() => console.log("database connected"))
+      .then(() => console.log("mongoDB is connected"))
       .catch((err) => console.log(err))
 
 //frontend we are using port 3000 and backend 4000 
